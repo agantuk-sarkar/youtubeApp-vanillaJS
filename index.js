@@ -40,21 +40,53 @@ const showVideo = (videoList) => {
   console.log("videos:", videoList);
   video_subContainer.innerHTML = "";
 
-  // // using higher order function
+  // using higher order function
   videoList?.forEach((videos) => {
-    const iframe_mainDiv = document.createElement("div");
-    iframe_mainDiv.classList.add("border-2","border-red-500","h-[30vh]");
+    // const iframe_mainDiv = document.createElement("div");
+    // iframe_mainDiv.classList.add("border-2","border-red-500","h-[30vh]");
 
-    if (videos?.id?.videoId) {
-      const iframe = document.createElement("iframe");
+    // // using destructuring by taking the same key and comparing with the object
+    
+    // // const {url} = videos.snippet.thumbnails.medium;
+    // // console.log("url:",url);
 
-      iframe.src = `https://www.youtube.com/embed/${videos.id.videoId}`;
-      iframe.classList.add("h-full","w-full","border-2","border-green-500");
-      iframe.allowFullscreen = true;
-      iframe.style.borderRadius = "10px";
+    // if (videos?.id?.videoId) {
+    //   const iframe = document.createElement("iframe");
 
-      iframe_mainDiv.append(iframe);
-      video_subContainer.append(iframe_mainDiv);
+    //   iframe.src = `https://www.youtube.com/embed/${videos.id.videoId}`;
+    //   iframe.classList.add("h-full","w-full","border-2","border-green-500");
+    //   iframe.allowFullscreen = true;
+    //   iframe.style.borderRadius = "10px";
+
+    //   iframe_mainDiv.append(iframe);
+    //   video_subContainer.append(iframe_mainDiv);
+    // }
+
+    // using destructuring by comparing the object returned from function
+
+    // const{id:{videoId},snippet:{title,thumbnails:{medium:{url : imageUrl}}}} = videos
+    const {videoId,title,url:imageUrl} = getObject(videos);
+
+    if(videoId){
+      const thumbnailDiv = document.createElement("div");
+      thumbnailDiv.classList.add("border-2","border-green-500","h-[32vh]","cursor-pointer","rounded-lg");
+
+      const imageTag = document.createElement("img");
+      imageTag.src = imageUrl;
+      imageTag.classList.add("h-full","w-full");
+
+      thumbnailDiv.append(imageTag);
+      video_subContainer.append(thumbnailDiv);
     }
+
   });
 };
+
+// function to return object
+const getObject = (videoObj)=>{
+  return{
+    videoId: videoObj.id.videoId,
+    title:videoObj.snippet.title,
+    url:videoObj.snippet.thumbnails.medium.url
+  }
+}
