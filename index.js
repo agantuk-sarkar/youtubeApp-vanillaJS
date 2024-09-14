@@ -75,6 +75,18 @@ const showVideo = (videoList) => {
       imageTag.src = imageUrl;
       imageTag.classList.add("h-full","w-full");
 
+      // click event for thumbnail div
+      thumbnailDiv.addEventListener("click",()=>{
+
+        let videoObject = {
+          videoId,
+          title
+        }
+        localStorage.setItem("videoObj",JSON.stringify(videoObject));
+
+        window.location.href = "./video.html";
+      })
+
       thumbnailDiv.append(imageTag);
       video_subContainer.append(thumbnailDiv);
     }
