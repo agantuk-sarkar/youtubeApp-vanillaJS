@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Videos Page</title>
+    <style>
+      *{
+        box-sizing: border-box;
+      }
+    </style>
 </head>
 <body>
     <!-- main container wrt viewport -->
-    <div class="main-container border-2 border-red-500 h-[300vh] relative">
+    <div class="main-container border-2 border-red-500 h-[500vh] relative">
         <!-- nav bar main container -->
         <div
           class="nav-mainContainer border-2 border-blue-500 h-[10vh] shadow-md rounded-md sticky top-0 bg-white"
@@ -18,7 +23,7 @@
             class="image-inputMainConatiner border-2 border-green-500 h-full rounded-md flex gap-[10rem]"
           >
             <!-- image icon div -->
-            <div class="imageIcon-div border-2 border-orange-500 h-full w-[15%]">
+            <div class="imageIcon-div border-2 border-orange-500 h-full w-auto">
               <img
                 class="h-full w-full"
                 src="https://lh3.googleusercontent.com/3zkP2SYe7yYoKKe47bsNe44yTgb4Ukh__rBbwXwgkjNRe4PykGG409ozBxzxkrubV7zHKjfxq6y9ShogWtMBMPyB3jiNps91LoNH8A=s500"
@@ -46,11 +51,13 @@
           </div>
         </div>
         <!-- movie videos main container -->
-         <div class="videos-mainContainer border-2 border-green-500 min-h-[80vh] mt-[1rem]">
+         <div class="videos-mainContainer border-2 border-green-500 min-h-[80vh] mt-[1rem] flex justify-between gap-2">
           <!-- videos sub container -->
-           <div class="video-subContainer border-2 border-blue-500 h-full gap-4 p-2">
+           <div class="video-subContainer border-2 border-blue-500 h-full w-[60%] p-2">
               <!-- <iframe width="684" height="385" src="https://www.youtube.com/embed/tlThdr3O5Qo" title="Full Self-Driving" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
            </div>
+           <!-- recommendation sub container -->
+            <div class="recommendation-subContainer border-2 border-teal-600 min-h-[53vh] w-[40%]"></div>
          </div>
       </div>
 </body>

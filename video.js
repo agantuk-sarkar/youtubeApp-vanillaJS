@@ -5,6 +5,9 @@ const get_video_obj = JSON.parse(localStorage.getItem("videoObj"));
 // video sub container where the videos are displayed
 const video_subContainer = document.querySelector(".video-subContainer");
 
+// recommendation container where thumbnails are shown
+const recommendation_subContainer = document.querySelector(".recommendation-subContainer");
+
 // youtube api key
 const apiKey = "AIzaSyAEiqct4ez7etprYnUB1mf_-x2kwmcNLZc";
 
@@ -31,6 +34,7 @@ const fetchUrl = async (url) => {
       let data = await responseObj.json();
       // console.log("data:",data);
       showVideo(data.items);
+      recommendations(data.items);
     } else {
       throw new Error("It's a bad request");
     }
@@ -54,8 +58,8 @@ const showVideo = (videoList) => {
       iframe_mainDiv.classList.add(
         "border-2",
         "border-red-500",
-        "h-[50vh]",
-        "w-[60%]",
+        "h-[53vh]",
+        "w-full",
         "mb-[1rem]"
       );
 
@@ -74,7 +78,7 @@ const showVideo = (videoList) => {
       title_div.classList.add(
         "border-2",
         "border-blue-500",
-        "h-[10vh]",
+        "h-[12vh]",
         "rounded-lg"
       );
 
@@ -93,13 +97,13 @@ const showVideo = (videoList) => {
 };
 
 // function to show videos in iframe with title when clicked on the thumbnails from index.html page
-const showVideos = ({ videoId, title }) => {
+const showSearchedVideos = ({ videoId, title }) => {
   const iframe_mainDiv = document.createElement("div");
   iframe_mainDiv.classList.add(
     "border-2",
     "border-red-500",
     "h-[50vh]",
-    "w-[60%]",
+    "w-full",
   );
 
   const iframe_tag = document.createElement("iframe");
@@ -127,4 +131,26 @@ const showVideos = ({ videoId, title }) => {
   iframe_mainDiv.append(iframe_tag, title_div);
   video_subContainer.append(iframe_mainDiv);
 };
-showVideos(({ videoId, title } = get_video_obj));
+showSearchedVideos(({ videoId, title } = get_video_obj));
+
+// function for recommendation container to show thumbnails
+const recommendations = (videoArray)=>{
+  recommendation_subContainer.innerHTML = "";
+
+  const headingTag = document.createElement("p");
+  headingTag.textContent = "Recommendations"
+  headingTag.classList.add("border-2","border-red-500","italic","text-lg","font-semibold","text-center");
+
+  recommendation_subContainer.append(headingTag);
+}
+
+
+
+
+// function which will return title and thumbnail url
+const getTitleAndUrl = (videoProperties)=>{
+  return{
+    title: videoProperties.snippet.title,
+    url: videoProperties.snippet.thumbnails.medium.url
+  }
+}
