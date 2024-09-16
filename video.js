@@ -60,7 +60,9 @@ const showVideo = (videoList) => {
         "border-red-500",
         "h-[53vh]",
         "w-full",
-        "mb-[1rem]"
+        "mb-[1rem]",
+        "shadow-md",
+        "rounded-lg"
       );
 
       const iframe_tag = document.createElement("iframe");
@@ -79,7 +81,8 @@ const showVideo = (videoList) => {
         "border-2",
         "border-blue-500",
         "h-[12vh]",
-        "rounded-lg"
+        "rounded-lg",
+        "shadow-md"
       );
 
       const title_text = document.createElement("p");
@@ -104,6 +107,8 @@ const showSearchedVideos = ({ videoId, title }) => {
     "border-red-500",
     "h-[50vh]",
     "w-full",
+    "rounded-lg",
+    "shadow-md"
   );
 
   const iframe_tag = document.createElement("iframe");
@@ -117,7 +122,8 @@ const showSearchedVideos = ({ videoId, title }) => {
     "border-2",
     "border-blue-500",
     "h-[10vh]",
-    "rounded-lg"
+    "rounded-lg",
+    "shadow-md"
   );
 
   const title_text = document.createElement("p");
@@ -139,15 +145,42 @@ const recommendations = (videoArray)=>{
 
   const headingTag = document.createElement("p");
   headingTag.textContent = "Recommendations"
-  headingTag.classList.add("border-2","border-red-500","italic","text-lg","font-semibold","text-center");
-
+  headingTag.classList.add("border-2","border-red-500","italic","text-lg","font-semibold","text-center","mb-[1rem]");
   recommendation_subContainer.append(headingTag);
+
+  // using higher order function
+  videoArray?.forEach((thumbnailsVideo)=>{
+
+    const {title,url} = getTitleAndUrl(thumbnailsVideo);
+
+    const thumbnail_mainDiv = document.createElement("div");
+    thumbnail_mainDiv.classList.add("border-2","border-red-500","h-[43vh]","mb-[1rem]","rounded-lg","shadow-md","cursor-pointer");
+    // adding click event in thumbnail_mainDiv
+    thumbnail_mainDiv.addEventListener("click",()=>{
+      window.location.href = "./video.html";
+    });
+
+    const thumbnail_imageTag = document.createElement("img");
+    thumbnail_imageTag.src = url;
+    thumbnail_imageTag.classList.add("h-40","w-full");
+
+    const title_div = document.createElement("div");
+    title_div.classList.add("border-2","border-blue-600","h-[6rem]","shadow-md","rounded-lg");
+
+    const title_text = document.createElement("p");
+    title_text.textContent = title;
+    title_text.classList.add("italic","text-lg");
+
+    title_div.append(title_text);
+
+    thumbnail_mainDiv.append(thumbnail_imageTag,title_div);
+
+    recommendation_subContainer.append(thumbnail_mainDiv);
+  })
+
 }
 
-
-
-
-// function which will return title and thumbnail url
+// function which will return title and thumbnail url from each object
 const getTitleAndUrl = (videoProperties)=>{
   return{
     title: videoProperties.snippet.title,
