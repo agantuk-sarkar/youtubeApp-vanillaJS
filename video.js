@@ -87,7 +87,7 @@ const showVideo = (videoList) => {
 
       const title_text = document.createElement("p");
       title_text.textContent = title;
-      title_text.classList.add("font-semibold", "text-xl", "p-2", "italic");
+      title_text.classList.add("font-semibold", "text-lg", "px-0.5", "italic");
 
       // appending title text into title div
       title_div.append(title_text);
@@ -128,7 +128,7 @@ const showSearchedVideos = ({ videoId, title }) => {
 
   const title_text = document.createElement("p");
   title_text.textContent = title;
-  title_text.classList.add("font-semibold", "text-xl", "p-2", "italic");
+  title_text.classList.add("font-semibold", "text-lg", "px-0.5", "italic");
 
   // appending title text into title div
   title_div.append(title_text);
